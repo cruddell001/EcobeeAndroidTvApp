@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.bigcommerce.mytvapp"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "ECOBEE_API_KEY", "\"$apiKey\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+}
+
+ext {
+    versions = [
+            ktor              : '1.1.4',
+            okhttp            : '3.14.1',
+            firebase_core     : '16.0.9',
+            firebase_messaging: '18.0.0',
+            firebase_ktx      : '17.0.0',
+            segment           : '4.4.0-beta1',
+            lifecycle         : "1.1.1",
+            room              : "1.1.1",
+            sentry            : "1.7.16",
+            slf4j             : "1.7.25",
+            core_ktx          : "1.2.0-alpha02",
+            appcompat         : "1.1.0-beta01",
+            android_legacy_4  : "1.0.0",
+            glide             : "4.9.0",
+            mp_android_chart  : "v3.1.0",
+            material_design   : "1.1.0-alpha07",
+            constraint_layout : "2.0.0-alpha5",
+            android_pref      : "1.1.0-beta01",
+            coroutines_core   : "1.2.0",
+            coroutines_android: "1.1.1",
+            arbiter           : "0.0.19",
+            retrofit          : "2.5.0",
+            cardview          : "1.0.0"
+    ]
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.leanback:leanback:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    // android support
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "com.google.android.material:material:$versions.material_design"
+
+    //coroutines
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+}
